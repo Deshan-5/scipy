@@ -9718,6 +9718,13 @@ def wasserstein_distance(u_values, v_values, u_weights=None, v_weights=None):
     ...                      [1.4, 0.9, 3.1, 7.2], [3.2, 3.5])
     4.0781331438047861
 
+    >>> # Weights are normalized internally to sum to 1. For example, reference [2]_
+    >>> # discusses an example with values [1, 2, 3, 4] and unnormalized weights
+    >>> # [3, 2, 1, 4] and [1, 2, 4, 3]. Passing these weights directly returns
+    >>> # the normalized result. To recover the unnormalized distance, multiply by
+    >>> # the sum of the weights (here, 1+2+3+4=10).
+    >>> wasserstein_distance([1, 2, 3, 4], [1, 2, 3, 4], [3, 2, 1, 4], [1, 2, 4, 3])
+    0.5
     """
     return _cdf_distance(1, u_values, v_values, u_weights, v_weights)
 
